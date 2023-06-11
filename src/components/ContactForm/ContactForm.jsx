@@ -1,22 +1,32 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { setName, setNumber } from 'store/form/formSlice';
+import { formSelector } from 'store/form/selectors';
 
 export function ContactForm({ onSubmitData }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  // const [name, setName] = useState('');
+  // const [number, setNumber] = useState('');
+
+  const { name, number } = useSelector(formSelector);
+  const dispatch = useDispatch();
 
   function handleChange(evt) {
-    if (evt.target.name === 'name') setName(evt.target.value);
-    if (evt.target.name === 'number') setNumber(evt.target.value);
+    if (evt.target.name === 'name') dispatch(setName(evt.target.value));
+    if (evt.target.name === 'number') dispatch(setNumber(evt.target.value));
+    // if (evt.target.name === 'name') setName(evt.target.value);
+    // if (evt.target.name === 'number') setNumber(evt.target.value);
   }
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
     onSubmitData(name, number);
-    setName('');
-    setNumber('');
+    dispatch(setName(''));
+    // setName('');
+    dispatch(setNumber(''));
+    // setNumber('');
   }
 
   return (
