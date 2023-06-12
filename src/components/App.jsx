@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import Notiflix from 'notiflix';
-import { nanoid } from 'nanoid';
+// import React, { useEffect } from 'react';
+// import { useState } from 'react';
+// import Notiflix from 'notiflix';
+// import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
 import { Filter } from './Filter';
 import { useDispatch, useSelector } from 'react-redux';
-import { formSelector } from 'store/form/selectorsForm';
-import { setName, setNumber } from 'store/form/formSlice';
+// import { formSelector } from 'store/form/selectorsForm';
+// import { setName, setNumber } from 'store/form/formSlice';
 import { appSelector } from 'store/app/selectorsApp';
-import { setContacts, setFilter } from 'store/app/appSlice';
+import { setContacts } from 'store/app/appSlice';
 
 export function App() {
   // const [contacts, setContacts] = useState([]);
@@ -18,7 +18,7 @@ export function App() {
   // const [name, setName] = useState('');
   // const [number, setNumber] = useState('');
 
-  const { name, number } = useSelector(formSelector);
+  // const { name, number } = useSelector(formSelector);
   const { contacts, filter } = useSelector(appSelector);
   const dispatch = useDispatch();
 
@@ -34,38 +34,10 @@ export function App() {
   //   }
   // }, [contacts, name, number]);
 
-  // !!!!!!!!!============!!!!!!!!!
-  function formSubmitHandler(name, number) {
-    const normalizedName = name.toLowerCase();
-    const normalizedNumber = number.toLowerCase();
-
-    if (
-      contacts.some(el => el.name.toLowerCase() === normalizedName) ||
-      contacts.some(el => el.number.toLowerCase() === normalizedNumber)
-    ) {
-      Notiflix.Notify.failure(`${name} is already in contacts`);
-
-      return;
-    }
-
-    // const newContact = {
-    //   id: nanoid(),
-    //   name,
-    //   number,
-    // };
-
-    // setName(name);
-    dispatch(setName(name)); // !!!!!!!!!!!!!!!
-    // setNumber(number);
-    dispatch(setNumber(number)); // !!!!!!!!!!!!!!!
-    // setContacts(prev => [...prev, newContact]);
-    dispatch(setContacts(name, number)); // !!!!!!!!!!!!!!!
-  }
-
-  function changeFilter(evt) {
-    // setFilter(evt.currentTarget.value);
-    dispatch(setFilter(evt.currentTarget.value));
-  }
+  // function changeFilter(evt) {
+  //   // setFilter(evt.currentTarget.value);
+  //   dispatch(setFilter(evt.currentTarget.value));
+  // }
 
   function getFiltered() {
     const normalizedFilter = filter.toLowerCase();
@@ -85,10 +57,11 @@ export function App() {
     <>
       <h1>Phonebook</h1>
       <p>React Hooks & Redux toolkit</p>
-      <ContactForm onSubmitData={formSubmitHandler} />
+      <ContactForm />
 
       <h2>Contacts</h2>
-      <Filter value={filter} onChangeFilter={changeFilter} />
+      {/* <Filter value={filter} onChangeFilter={changeFilter} /> */}
+      <Filter />
       <ContactList contacts={getFiltered()} onDeleteContact={deleteContact} />
     </>
   );
