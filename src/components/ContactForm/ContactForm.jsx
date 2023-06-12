@@ -3,7 +3,7 @@ import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { setName, setNumber } from 'store/form/formSlice';
-import { formSelector } from 'store/form/selectors';
+import { formSelector } from 'store/form/selectorsForm';
 
 export function ContactForm({ onSubmitData }) {
   // const [name, setName] = useState('');

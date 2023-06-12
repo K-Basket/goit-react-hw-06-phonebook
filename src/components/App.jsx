@@ -6,29 +6,33 @@ import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
 import { Filter } from './Filter';
 import { useDispatch, useSelector } from 'react-redux';
-import { formSelector } from 'store/form/selectors';
+import { formSelector } from 'store/form/selectorsForm';
 import { setName, setNumber } from 'store/form/formSlice';
+import { appSelector } from 'store/app/selectorsApp';
+import { setContacts, setFilter } from 'store/app/appSlice';
 
 export function App() {
-  const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState('');
+  // const [contacts, setContacts] = useState([]);
+  // const [filter, setFilter] = useState('');
+
   // const [name, setName] = useState('');
   // const [number, setNumber] = useState('');
 
   const { name, number } = useSelector(formSelector);
+  const { contacts, filter } = useSelector(appSelector);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const getContacts = JSON.parse(localStorage.getItem('contacts'));
+  // useEffect(() => {
+  //   const getContacts = JSON.parse(localStorage.getItem('contacts'));
 
-    if (getContacts) setContacts(getContacts);
-  }, []);
+  //   if (getContacts) setContacts(getContacts);
+  // }, []);
 
-  useEffect(() => {
-    if (name && number) {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-    }
-  }, [contacts, name, number]);
+  // useEffect(() => {
+  //   if (name && number) {
+  //     localStorage.setItem('contacts', JSON.stringify(contacts));
+  //   }
+  // }, [contacts, name, number]);
 
   // !!!!!!!!!============!!!!!!!!!
   function formSubmitHandler(name, number) {
@@ -44,21 +48,23 @@ export function App() {
       return;
     }
 
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
+    // const newContact = {
+    //   id: nanoid(),
+    //   name,
+    //   number,
+    // };
 
-    setContacts(prev => [...prev, newContact]);
     // setName(name);
-    dispatch(setName(name));
+    dispatch(setName(name)); // !!!!!!!!!!!!!!!
     // setNumber(number);
-    dispatch(setNumber(number));
+    dispatch(setNumber(number)); // !!!!!!!!!!!!!!!
+    // setContacts(prev => [...prev, newContact]);
+    dispatch(setContacts(name, number)); // !!!!!!!!!!!!!!!
   }
 
   function changeFilter(evt) {
-    setFilter(evt.currentTarget.value);
+    // setFilter(evt.currentTarget.value);
+    dispatch(setFilter(evt.currentTarget.value));
   }
 
   function getFiltered() {
@@ -70,7 +76,9 @@ export function App() {
   }
 
   function deleteContact(contactId) {
-    setContacts(prev => prev.filter(el => el.id !== contactId));
+    // setContacts(prev => prev.filter(el => el.id !== contactId));
+    dispatch(setContacts(contacts.filter(el => el.id !== contactId)));
+    // setContacts(prev => prev.filter(el => el.id !== contactId));
   }
 
   return (
