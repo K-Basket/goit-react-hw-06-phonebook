@@ -5,11 +5,11 @@
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
 import { Filter } from './Filter';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 // import { formSelector } from 'store/form/selectorsForm';
 // import { setName, setNumber } from 'store/form/formSlice';
-import { appSelector } from 'store/app/selectorsApp';
-import { setContacts } from 'store/app/appSlice';
+// import { appSelector } from 'store/app/selectorsApp';
+// import { setContacts } from 'store/app/appSlice';
 
 export function App() {
   // const [contacts, setContacts] = useState([]);
@@ -19,8 +19,8 @@ export function App() {
   // const [number, setNumber] = useState('');
 
   // const { name, number } = useSelector(formSelector);
-  const { contacts, filter } = useSelector(appSelector);
-  const dispatch = useDispatch();
+  // const { contacts, filter } = useSelector(appSelector);
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   const getContacts = JSON.parse(localStorage.getItem('contacts'));
@@ -39,19 +39,19 @@ export function App() {
   //   dispatch(setFilter(evt.currentTarget.value));
   // }
 
-  function getFiltered() {
-    const normalizedFilter = filter.toLowerCase();
+  // function getFiltered() {
+  //   const normalizedFilter = filter.toLowerCase();
 
-    return contacts.filter(el =>
-      el.name.toLowerCase().includes(normalizedFilter)
-    );
-  }
+  //   return contacts.filter(el =>
+  //     el.name.toLowerCase().includes(normalizedFilter)
+  //   );
+  // }
 
-  function deleteContact(contactId) {
-    // setContacts(prev => prev.filter(el => el.id !== contactId));
-    dispatch(setContacts(contacts.filter(el => el.id !== contactId)));
-    // setContacts(prev => prev.filter(el => el.id !== contactId));
-  }
+  // function deleteContact(contactId) {
+  //   // setContacts(prev => prev.filter(el => el.id !== contactId));
+  //   dispatch(setContacts(contacts.filter(el => el.id !== contactId)));
+  //   // setContacts(prev => prev.filter(el => el.id !== contactId));
+  // }
 
   return (
     <>
@@ -62,7 +62,8 @@ export function App() {
       <h2>Contacts</h2>
       {/* <Filter value={filter} onChangeFilter={changeFilter} /> */}
       <Filter />
-      <ContactList contacts={getFiltered()} onDeleteContact={deleteContact} />
+      {/* <ContactList contacts={getFiltered()} onDeleteContact={deleteContact} /> */}
+      <ContactList />
     </>
   );
 }

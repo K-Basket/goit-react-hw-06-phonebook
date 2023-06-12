@@ -24,6 +24,9 @@ export const appSlice = createSlice({
         };
       },
     },
+    updateContacts: (state, action) => {
+      state.contacts = action.payload;
+    },
 
     setFilter: (state, action) => {
       state.filter = action.payload;
@@ -32,4 +35,4 @@ export const appSlice = createSlice({
 });
 
 export const appReducer = appSlice.reducer;
-export const { setContacts, setFilter } = appSlice.actions;
+export const { setContacts, setFilter, updateContacts } = appSlice.actions;
