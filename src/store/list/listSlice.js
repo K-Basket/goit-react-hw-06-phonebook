@@ -1,13 +1,12 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
-// import { reducer } from 'store/reducer';
 
 const initialState = {
   contacts: [],
   filter: '',
 };
 
-export const appSlice = createSlice({
-  name: 'app',
+export const listSlice = createSlice({
+  name: 'list',
   initialState: initialState,
   reducers: {
     setContacts: {
@@ -34,5 +33,5 @@ export const appSlice = createSlice({
   },
 });
 
-export const appReducer = appSlice.reducer;
-export const { setContacts, setFilter, updateContacts } = appSlice.actions;
+export const listReducer = listSlice.reducer;
+export const { setContacts, setFilter, updateContacts } = listSlice.actions;
