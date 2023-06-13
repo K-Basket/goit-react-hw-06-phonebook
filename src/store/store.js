@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer } from './reducer';
+// import { reducer } from './reducer';
 
 import {
   persistReducer,
@@ -12,14 +12,16 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import { listReducer } from './list/listSlice';
 
 const persistConfig = {
-  key: 'count',
+  key: 'contacts',
   storage,
-  blacklist: ['form'],
+  blacklist: ['filter'],
 };
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+const persistedReducer = persistReducer(persistConfig, listReducer);
+// const persistedReducer = persistReducer(persistConfig, reducer);
 
 // export const store = configureStore({ reducer: reducer });
 // configureStore обязательно принимает объект

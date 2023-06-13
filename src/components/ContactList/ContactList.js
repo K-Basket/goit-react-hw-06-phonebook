@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateContacts } from 'store/list/listSlice';
+import { deleteContact } from 'store/list/listSlice';
 import { listSelector } from 'store/list/selectorsList';
 
 export function ContactList() {
@@ -16,11 +16,6 @@ export function ContactList() {
     );
   }
 
-  function deleteContact(contactId) {
-    const result = contacts.filter(el => el.id !== contactId);
-    return dispatch(updateContacts(result));
-  }
-
   return (
     <ul>
       {getFiltered().map(({ id, name, number }) => (
@@ -31,7 +26,7 @@ export function ContactList() {
               <span>: {number}</span>
             </p>
 
-            <button onClick={() => deleteContact(id)}>Delete</button>
+            <button onClick={() => dispatch(deleteContact(id))}>Delete</button>
           </div>
         </li>
       ))}
