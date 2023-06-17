@@ -2,15 +2,14 @@ import Notiflix from 'notiflix';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setContacts } from 'store/list/listSlice';
-import { listSelector } from 'store/list/selectorsList';
+import { contactsSelector } from 'store/list/selectorsList';
 import { useState } from 'react';
 
 export function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  // const { name, number } = useSelector(formSelector);
-  const { contacts } = useSelector(listSelector);
+  const contacts = useSelector(contactsSelector);
   const dispatch = useDispatch();
 
   function handleChange(evt) {
